@@ -1,6 +1,3 @@
-# Create you api access on the testnet binance
-https://testnet.binance.vision
-
 # Set up VM
 
 ## Packages
@@ -16,6 +13,9 @@ pip install python-binance<br>
 - Drag & drop the folder using Visual Studio
 - Or manage SSH key on your VM and put public key on GitHub or simply
 git clone git@github.com:FGaloha/binance_bot.git
+
+# Create you api access on the testnet binance
+https://testnet.binance.vision
 
 ## Check .env contains necessary variables
 touch .env
