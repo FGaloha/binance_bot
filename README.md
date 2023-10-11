@@ -14,7 +14,7 @@ pip install python-binance<br>
 - Or manage SSH key on your VM and put public key on GitHub or simply
 git clone git@github.com:FGaloha/binance_bot.git
 
-# Create you api access on the testnet binance
+## Create your api access on the testnet binance
 https://testnet.binance.vision
 
 ## Check .env contains necessary variables
@@ -40,7 +40,7 @@ chmod +x setup.sh
 ## Put the period in historical-data-engine.py
 python3 -u historical-data-engine.py > results/engine.txt
 
-# Actions to do from Airflow
+## Actions to do from Airflow
 
 Access airflow:
 http://localhost:8080/
@@ -54,17 +54,17 @@ cp dags/Random_Forest_model.pkl bot_api/
 docker-compose build botapi
 docker-compose up -d botapi
 
-# Access Jupyter notebook
+## Access Jupyter notebook
 
 http://localhost:8888/
 
-# To test the api put localhost or the IP of your VM
+## To test the api put localhost or the IP of your VM
 - Check running<br>
 http://localhost:8000
 - Check prediction<br>
 http://localhost:8000/prediction?eur_avg=30000.1&usdc_avg=30000.1&dai_avg=30000.1&gbp_avg=30000.1
 
-# Cronjobs on VM
+## Cronjobs on VM
 * * * * * /usr/bin/python3 /home/ubuntu/binance_bot/call_bot_api.py >> /home/ubuntu/binance_bot/results/call_bot_api.json 2>&1
 
 * * * * * /usr/bin/python3 /home/ubuntu/binance_bot/stream.py >> /home/ubuntu/binance_bot/results/stream_2.txt 2>&1
