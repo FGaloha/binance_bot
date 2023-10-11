@@ -1,4 +1,4 @@
-# Set up VM
+# Set up VM Demo
 
 ## Packages
 pip install pandas<br>
@@ -27,6 +27,7 @@ POSTGRES_PASSWORD=userpassword<br>
 BTCUSDT_LIMIT= 28000<br>
 API_KEY_TESTNET=REPLACE_BY_YOUR_KEY<br>
 API_SECRET_TESTNET=REPLACE_BY_YOUR_SECRET<br>
+
 - Generate from the terminal those used by airflow<br>
 echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" >> .env
 
@@ -48,15 +49,29 @@ Run the DAG btc_market_analysis to:
 - create & save machine learning models
 - select the best one
 
-Copy the best model to the bot api folder:
+Copy the best model to the bot api folder and reload the service:
 cp dags/Random_Forest_model.pkl bot_api/
+docker-compose build botapi
+docker-compose up -d botapi
 
-- Access jupyter notebook:
+# Access Jupyter notebook
+
 http://localhost:8888/
+
+# To test the api put localhost or the IP of your VM
+- Check running<br>
+http://localhost:8000
+- Check prediction<br>
+http://localhost:8000/prediction?eur_avg=30000.1&usdc_avg=30000.1&dai_avg=30000.1&gbp_avg=30000.1
+
+# Cronjobs on VM
+* * * * * /usr/bin/python3 /home/ubuntu/binance_bot/call_bot_api.py >> /home/ubuntu/binance_bot/results/call_bot_api.json 2>&1
+
+* * * * * /usr/bin/python3 /home/ubuntu/binance_bot/stream.py >> /home/ubuntu/binance_bot/results/stream_2.txt 2>&1
 
 *** *** *** *** *** ***
 
-# Used for tests
+# Used for tests only
 - Uses a MongoDB market collection using historical-data-engine-FG.py (works also with historical-data-engine.py) and generating a machine learning model using service pyspark
 - Models is copied on the bot_api at the end of the process and can be used by bot_apy.py
 
@@ -77,9 +92,3 @@ docker cp pyspark:/home/jovyan/work/bot_api_model/ jupyter_notebook_volume/
 
 ## To do each time after docker-compose up -d
 docker cp jupyter_notebook_volume/. botapi:/app/models/
-
-# To test the api put localhost or the IP of your VM
-- Check running<br>
-http://localhost:8000
-- Check prediction<br>
-http://localhost:8000/prediction?eur_avg=30000.1&usdc_avg=30000.1&dai_avg=30000.1&gbp_avg=30000.1
