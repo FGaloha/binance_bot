@@ -49,10 +49,10 @@ Run the DAG btc_market_analysis to:
 - create & save machine learning models
 - select the best one
 
-Copy the best model to the bot api folder and reload the service:
-cp dags/Random_Forest_model.pkl bot_api/
-docker-compose build botapi
-docker-compose up -d botapi
+Copy the best model to the bot api folder and reload the service:<br>
+cp dags/Random_Forest_model.pkl bot_api/<br>
+docker-compose build botapi<br>
+docker-compose up -d botapi<br>
 
 ## Access Jupyter notebook
 
@@ -62,7 +62,7 @@ http://localhost:8888/
 - Check running<br>
 http://localhost:8000
 - Check prediction<br>
-http://localhost:8000/prediction?eur_avg=30000.1&usdc_avg=30000.1&dai_avg=30000.1&gbp_avg=30000.1
+/bot_api/test.py
 
 ## Cronjobs on VM
 * * * * * /usr/bin/python3 /home/ubuntu/binance_bot/call_bot_api.py >> /home/ubuntu/binance_bot/results/call_bot_api.json 2>&1
